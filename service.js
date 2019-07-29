@@ -1,7 +1,7 @@
 const service = require('node-windows').Service;
 
 const controlServerService = new Service({
-    name:'Control Server',
+    name:'Remote Control Server',
     description: 'HTTP Server for executing commands.',
     script: 'index.js'
 });
