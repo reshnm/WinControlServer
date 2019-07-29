@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/reshnm/WinControlServer#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "node-windows": "^0.1.14"
   }
 }
