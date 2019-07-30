@@ -1,4 +1,4 @@
-const service = require('node-windows').Service;
+const Service = require('node-windows').Service;
 
 const controlServerService = new Service({
     name:'Remote Control Server',
