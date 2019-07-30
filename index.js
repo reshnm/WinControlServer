@@ -23,9 +23,13 @@ async function runCmd(cmd, res) {
     }
 }
 
+function invalidRequest(res) {
+    res.status(400);
+    res.end(JSON.stringify({ error: 'invalid request' }));
+}
 
 app.get('/', (req, res) => {
-    res.end();
+    res.end('alive');
 });
 
 app.post('/shutdown', (req, res) => {
@@ -45,8 +49,7 @@ app.post('/shutdown', (req, res) => {
 
         runCmd(cmd, res);
     } else {
-        res.status(400);
-        res.end(JSON.stringify({ error: 'invalid request' }));
+        invalidRequest();
     }
 });
 
@@ -64,8 +67,24 @@ app.post('/killprocess', (req, res) => {
     if (pid != undefined && !isNaN(pid)) {
         runCmd('Taskkill /PID ' + pid + ' /F', res);
     } else {
-        res.status(400);
-        res.end(JSON.stringify({ error: 'invalid request' }));
+        invalidRequest();
+    }
+});
+
+app.post('/runparsec', (req, res) => {
+    const serverId = req.body.serverId;
+    const settings = req.body.settings;
+
+    if (serverId != undefined) {
+        var cmd = '"C:\\Program Files\\Parsec\\parsecd.exe" server_id=' + serverId;
+
+        if (settings != undefined) {
+            cmd += ':' + settings;
+        }
+
+        runCmd(cmd, res);
+    } else {
+        invalidRequest();
     }
 });
 
