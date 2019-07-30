@@ -30,14 +30,20 @@ app.get('/', (req, res) => {
 
 app.post('/shutdown', (req, res) => {
     const shutdownTimeout = req.body.timeout;
+    const force = req.body.force
+
     if (shutdownTimeout != undefined && !isNaN(shutdownTimeout)) {
-        console.log(`shutdown timeout ${shutdownTimeout}`);
+        var cmd = 'shutdown -s';
+
+        if (force) {
+            cmd += ' -f';
+        }
 
         if (shutdownTimeout > 0) {
-            runCmd('shutdown –s –t ' + shutdownTimeout, res)
-        } else {
-            runCmd('shutdown', res);
+            cmd += ' -t ' + shutdownTimeout;
         }
+
+        runCmd(cmd, res);
     } else {
         res.status(400);
         res.end(JSON.stringify({ error: 'invalid request' }));
