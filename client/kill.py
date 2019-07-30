@@ -11,8 +11,8 @@ def main(argv=None):
     url = args.url
     pid = args.pid
 
-    response = request.post(url + '/killprocess', { 'pid': pid })
-    print(response.json())
+    res = request.post(url + '/killprocess', { 'pid': pid })
+    request.print_response(res)
 
 if __name__ == "__main__":
     sys.exit(main())

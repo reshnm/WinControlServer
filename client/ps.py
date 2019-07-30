@@ -9,8 +9,8 @@ def main(argv=None):
 
     url = args.url
 
-    response = request.get(url + '/processlist')
-    print(response.json())
+    res = request.get(url + '/processlist')
+    request.print_response(res)
 
 if __name__ == "__main__":
     sys.exit(main())

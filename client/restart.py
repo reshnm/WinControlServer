@@ -9,8 +9,8 @@ def main(argv=None):
 
     url = args.url
 
-    response = request.post(url + '/restart', {})
-    print(response.json())
+    res = request.post(url + '/restart', {})
+    request.print_response(res)
 
 if __name__ == "__main__":
     sys.exit(main())
